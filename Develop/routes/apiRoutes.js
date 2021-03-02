@@ -2,6 +2,7 @@ const { v4: uuidv4 } = require("uuid");
 const fs = require("fs");
 //getting the note data from the json file:
 const notesData = require("../db/db.json");
+savedNotes = [];
 
 module.exports = function (app) {
   //   * GET `/api/notes` - Should read the `db.json` file and return all saved notes as JSON.
