@@ -9,6 +9,7 @@ module.exports = function (app) {
     });
     //   * POST `/api/notes` - Should receive a new note to save on the request body, add it to the `db.json` file, and then return the new note to the client.
     app.post("/api/notes", function (req, res) {
+        const id = uuid.v4();
         notesData.push(req.body);
         res.json(true);
 
