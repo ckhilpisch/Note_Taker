@@ -1,7 +1,7 @@
 const { v4: uuidv4 } = require("uuid");
 const fs = require("fs");
 const path = require("path");
-const notesDatapath = path.join(__dirname, "../db/db.json");
+const notesDatapath = path.join("./db/db.json");
 // const savedNotes = [];
 
 module.exports = function (app) {
@@ -19,14 +19,15 @@ module.exports = function (app) {
   app.post("/api/notes", function (req, res) {
     console.log(notesDatapath);
     fs.readFile(notesDatapath, "utf-8", function (err, data) {
+      // console.log(err);
       if (err) {
         res.status(500).send({error : "couldn't read saved notes"});
-      } 
+      } else {
       let savedNotes = [];
       if (data) {
       savedNotes =JSON.parse(data);
       }
-      console.log(savedNotes);
+      // console.log(savedNotes);
 
       let newNote = req.body;
       newNote.id = uuidv4();
@@ -44,7 +45,8 @@ module.exports = function (app) {
           console.log(savedNotes);
           res.json(savedNotes);
         }
-      });  
+      }); 
+    }; 
     });
   });
 
