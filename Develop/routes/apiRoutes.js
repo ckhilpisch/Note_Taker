@@ -1,8 +1,8 @@
 const { v4: uuidv4 } = require("uuid");
 const fs = require("fs");
 const path = require("path");
-const notesDatapath  = path.join(__dirname, "../db/db.json");
-const savedNotes = [];
+const notesDatapath = path.join(__dirname, "../db/db.json");
+// const savedNotes = [];
 
 module.exports = function (app) {
   app.get("/api/notes", function (req, res) {
@@ -17,18 +17,33 @@ module.exports = function (app) {
   });
 
   app.post("/api/notes", function (req, res) {
-    const newNote = req.body;
-    newNote.id = uuidv4();
-    savedNotes.push(newNote);
-
-    fs.writeFile(notesDatapath, JSON.stringify(savedNotes), "utf-8", (err) => {
+    fs.readFile(notesDatapath, "utf-8", function (err, data) {
       if (err) {
         console.log(err);
-      } else {
-        console.log(savedNotes);
+      } else if (data) {
+        savedNotes = JSON.parse(data);
       }
+      let newNote = req.body;
+      newNote.id = uuidv4();
+
+      if (savedNotes) {
+        savedNotes += newNote;
+      } else {
+        savedNotes = [newNote];
+      }
+
+      // console.log(newNote);
+      // console.log(savedNotes);
+
+      fs.writeFile(notesDatapath, JSON.stringify(newNote), "utf-8", (err) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(savedNotes);
+        }
+      });
+      res.json(savedNotes);
     });
-    res.json(savedNotes);
   });
 
   app.delete("/api/notes/:id", function (req, res) {
