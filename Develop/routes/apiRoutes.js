@@ -19,12 +19,14 @@ module.exports = function (app) {
   app.post("/api/notes", function (req, res) {
     
     fs.readFile(notesDatapath, "utf-8", function (err, data) {
-      let savedNotes;
       if (err) {
         console.log(err);
-      } else if (data) {
-        savedNotes = JSON.parse(data);
+      } 
+      let savedNotes = [];
+      if (data) {
+      savedNotes =JSON.parse(data);
       }
+
       let newNote = req.body;
       newNote.id = uuidv4();
 
@@ -34,7 +36,7 @@ module.exports = function (app) {
         savedNotes = [newNote];
       }
 
-      fs.writeFile(notesDatapath, JSON.stringify(newNote), "utf-8", (err) => {
+      fs.writeFile(notesDatapath, JSON.stringify(savedNotes), "utf-8", (err) => {
         if (err) {
           console.log(err);
         } else {
