@@ -25,20 +25,14 @@ The application can be run in the Heroku app.
 ## Usage: 
 The user will open the Heroku app and find the note taker page.   Then the user can add notes by creating a title and filling in the text area.   When the user hits save the information is saved to the database.   Then the user can create a new note.   The user also has the capabilities to delete old notes or read saved notes by clicking on the saved notes.
 This is the completed site:
+
+
 ![Home Page](./assets/NoteHome.png)
 ![Notes Page](./assets/Notes.png)
 
 Here is the site in action:
 
 ![Note taker gif](./assets/noteTaker.gif)
-
-
-
-
-
-### Here is a link to a walk through tutorial of the app:
-<a href="https://drive.google.com/file/d/1U82AejhUMMP23WhD0YQmYFlxUK3yXHzR/view?usp=sharing">Walk through video</a>
-
 
 
 ## Testing:
