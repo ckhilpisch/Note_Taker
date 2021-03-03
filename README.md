@@ -27,12 +27,12 @@ The user will open the Heroku app and find the note taker page.   Then the user 
 This is the completed site:
 
 
-![Home Page](./assets/NoteHome.png)
-![Notes Page](./assets/Notes.png)
+![Home Page](./ReadAssets/NoteHome.png)
+![Notes Page](./ReadAssets/Notes.png)
 
 Here is the site in action:
 
-![Note taker gif](./assets/noteTaker.gif)
+![Note taker gif](./ReadAssets/noteTaker.gif)
 
 
 ## Testing:
