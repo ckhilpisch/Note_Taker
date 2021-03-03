@@ -45,7 +45,7 @@ module.exports = function (app) {
             console.log(err);
           }
         });
-        res.json(savedNotes);
+        res.json(notes);
       }
     });
   });
