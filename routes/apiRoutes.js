@@ -17,7 +17,7 @@ module.exports = function (app) {
   });
 
   app.post("/api/notes", function (req, res) {
-    
+    console.log(notesDatapath);
     fs.readFile(notesDatapath, "utf-8", function (err, data) {
       if (err) {
         res.status(500).send({error : "couldn't read saved notes"});
@@ -26,6 +26,7 @@ module.exports = function (app) {
       if (data) {
       savedNotes =JSON.parse(data);
       }
+      console.log(savedNotes);
 
       let newNote = req.body;
       newNote.id = uuidv4();
