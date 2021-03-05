@@ -21,7 +21,7 @@ For users that need to keep track of a lot of information, it's easy to forget o
 ## Installation :
 The application can be run in the Heroku app.
 
-Here is that website:
+### Here is that website:
 
 https://note-taker-express-ckhilpisch.herokuapp.com/
 
@@ -35,7 +35,7 @@ This is the completed site:
 ![Home Page](./ReadAssets/NoteHome.png)
 ![Notes Page](./ReadAssets/Notes.png)
 
-Here is the site in action:
+### Here is the site in action:
 
 ![Note taker gif](./ReadAssets/noteTaker.gif)
 
