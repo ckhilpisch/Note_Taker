@@ -2,13 +2,12 @@ const { v4: uuidv4 } = require("uuid");
 const fs = require("fs");
 const path = require("path");
 const notesDatapath = path.join("./db/db.json");
-// const savedNotes = [];
 
 module.exports = function (app) {
   app.get("/api/notes", function (req, res) {
     fs.readFile(notesDatapath, "utf-8", function (err, data) {
       if (err) {
-        res.status(500).send({error : "couldn't read saved notes"});
+        res.status(500).send({ error: "couldn't read saved notes" });
       } else {
         let savedNotes = JSON.parse(data);
         res.json(savedNotes);
@@ -19,41 +18,38 @@ module.exports = function (app) {
   app.post("/api/notes", function (req, res) {
     console.log(notesDatapath);
     fs.readFile(notesDatapath, "utf-8", function (err, data) {
-      // console.log(err);
       if (err) {
-        res.status(500).send({error : "couldn't read saved notes"});
+        res.status(500).send({ error: "couldn't read saved notes" });
       } else {
-      let savedNotes = [];
-      if (data) {
-      savedNotes =JSON.parse(data);
-      }
-      // console.log(savedNotes);
-
-      let newNote = req.body;
-      newNote.id = uuidv4();
-
-      // if (savedNotes) {
-      savedNotes.push(newNote);
-      // } else {
-      //   savedNotes = [newNote];
-      // }
-
-      fs.writeFile(notesDatapath, JSON.stringify(savedNotes), "utf-8", (err) => {
-        if (err) {
-          res.status(500).send({error : "couldn't add new note"});;
-        } else {
-          console.log(savedNotes);
-          res.json(savedNotes);
+        let savedNotes = [];
+        if (data) {
+          savedNotes = JSON.parse(data);
         }
-      }); 
-    }; 
+        let newNote = req.body;
+        newNote.id = uuidv4();
+        savedNotes.push(newNote);
+
+        fs.writeFile(
+          notesDatapath,
+          JSON.stringify(savedNotes),
+          "utf-8",
+          (err) => {
+            if (err) {
+              res.status(500).send({ error: "couldn't add new note" });
+            } else {
+              console.log(savedNotes);
+              res.json(savedNotes);
+            }
+          }
+        );
+      }
     });
   });
 
   app.delete("/api/notes/:id", function (req, res) {
     fs.readFile(notesDatapath, "utf-8", (err, data) => {
       if (err) {
-        res.status(500).send({error : "couldn't delete note"});  
+        res.status(500).send({ error: "couldn't delete note" });
       } else {
         const newData = JSON.parse(data);
         const deleted = req.params.id;
@@ -61,10 +57,12 @@ module.exports = function (app) {
         let notes = newData.filter((data) => data.id != deleted);
         fs.writeFile(notesDatapath, JSON.stringify(notes), "utf-8", (err) => {
           if (err) {
-            res.status(500).send({error : "couldn't write after deleted note"});
+            res
+              .status(500)
+              .send({ error: "couldn't write after deleted note" });
           }
           res.json(notes);
-        });  
+        });
       }
     });
   });
